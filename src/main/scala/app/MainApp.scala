@@ -15,7 +15,7 @@ object MainApp {
     val db = Database.forURL(
       "jdbc:mysql://localhost:3306/sit",  // MySQL URL
       user = "root",                     // MySQL username
-      password = "admin",                // MySQL password
+      password = "",                // MySQL password
       driver = "com.mysql.cj.jdbc.Driver", // MySQL JDBC Driver
       keepAliveConnection = true         // Keep the connection alive
     )
