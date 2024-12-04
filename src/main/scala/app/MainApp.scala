@@ -11,7 +11,7 @@ import services.JobInstanceService
 
 object MainApp {
   def main(args: Array[String]): Unit = {
-    // Setting up the MySQL database configuration
+    // Setting up the MySQL database configurat
     val db = Database.forURL(
       "jdbc:mysql://localhost:3306/sit",  // MySQL URL
       user = "root",                     // MySQL username
