@@ -11,11 +11,11 @@ import services.JobInstanceService
 
 object MainApp {
   def main(args: Array[String]): Unit = {
-    // Setting up the MySQL database configurat
+    // Setting up the MySQL database configuration
     val db = Database.forURL(
       "jdbc:mysql://localhost:3306/sit",  // MySQL URL
       user = "root",                     // MySQL username
-      password = "",                // MySQL password
+      password = "admin",                     // MySQL password
       driver = "com.mysql.cj.jdbc.Driver", // MySQL JDBC Driver
       keepAliveConnection = true         // Keep the connection alive
     )
@@ -46,6 +46,15 @@ object MainApp {
         val pw = new PrintWriter(new File("job_instance.json"))
         pw.write(jobInstanceJson.toString())
         pw.close()
+      }
+
+      // New section: Fetch and print all rows
+      val allJobInstancesFuture = jobInstanceService.getAllJobInstances()
+      val allJobInstances = Await.result(allJobInstancesFuture, 10.seconds)
+
+      println("All Job Instances:")
+      allJobInstances.foreach { jobInstance =>
+        println(s"JobInstanceId: ${jobInstance.jobInstanceId}, JobId: ${jobInstance.jobId}")
       }
     } catch {
       case ex: Exception => println(s"An error occurred: ${ex.getMessage}")
